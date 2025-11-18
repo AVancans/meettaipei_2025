@@ -64,10 +64,10 @@ export function LandingScreen() {
         }}
       />
 
-      <div className="relative z-10 w-full max-w-5xl mx-auto px-6">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-8">
         <div className="flex flex-col items-center">
           <motion.div
-            className="bg-brutal-white brutal-border-thick brutal-shadow-xl p-12 w-full max-w-4xl transform -rotate-1"
+            className="bg-brutal-white brutal-border-thick brutal-shadow-xl p-16 w-full transform -rotate-1"
             initial={{ opacity: 0, y: 100, scale: 0.8, rotate: -10 }}
             animate={{ opacity: 1, y: 0, scale: 1, rotate: -1 }}
             transition={{
@@ -77,7 +77,7 @@ export function LandingScreen() {
             }}
           >
             <motion.div
-              className="inline-flex items-center gap-3 px-6 py-3 brutal-border bg-neon-yellow mb-8 transform rotate-2"
+              className="inline-flex items-center gap-4 px-8 py-4 brutal-border-thick bg-neon-yellow mb-10 transform rotate-2"
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, type: 'spring', bounce: 0.6 }}
@@ -87,7 +87,7 @@ export function LandingScreen() {
                 animate={{ scale: [1, 1.3, 1] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
               />
-              <span className="text-base font-bold text-brutal-black uppercase tracking-tight">
+              <span className="text-xl font-bold text-brutal-black uppercase tracking-tight">
                 AI Detection Challenge
               </span>
             </motion.div>
@@ -98,7 +98,7 @@ export function LandingScreen() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              <h1 className="font-display text-7xl md:text-9xl font-black text-brutal-black mb-6 leading-none uppercase tracking-tighter">
+              <h1 className="font-display text-8xl md:text-[10rem] font-black text-brutal-black mb-6 leading-none uppercase tracking-tighter">
                 CAN YOU
                 <br />
                 <span className="text-neon-magenta text-stroke">
@@ -112,7 +112,7 @@ export function LandingScreen() {
             </motion.div>
 
             <motion.p
-              className="text-2xl md:text-3xl text-brutal-black font-bold mb-10 uppercase tracking-tight"
+              className="text-3xl md:text-4xl text-brutal-black font-bold mb-12 uppercase tracking-tight"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
@@ -121,7 +121,7 @@ export function LandingScreen() {
             </motion.p>
 
             <motion.div
-              className="grid grid-cols-3 gap-6 mb-10"
+              className="grid grid-cols-3 gap-8 mb-12"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
@@ -133,7 +133,7 @@ export function LandingScreen() {
               ].map((feature, i) => (
                 <motion.div
                   key={i}
-                  className={`${feature.bg} brutal-border-thick brutal-shadow p-6 text-center cursor-default`}
+                  className={`${feature.bg} brutal-border-thick brutal-shadow p-8 text-center cursor-default`}
                   whileHover={{
                     y: -8,
                     boxShadow: '16px 16px 0px 0px #000000'
@@ -142,8 +142,8 @@ export function LandingScreen() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.7 + i * 0.1, type: 'spring', bounce: 0.6 }}
                 >
-                  <div className="text-6xl mb-3">{feature.icon}</div>
-                  <div className="text-brutal-black font-black text-lg tracking-tight uppercase">
+                  <div className="text-7xl mb-4">{feature.icon}</div>
+                  <div className="text-brutal-black font-black text-xl tracking-tight uppercase">
                     {feature.label}
                   </div>
                 </motion.div>
@@ -152,7 +152,7 @@ export function LandingScreen() {
 
             <motion.button
               onClick={startGame}
-              className="group relative w-full px-12 py-8 font-black text-4xl text-brutal-white bg-brutal-black brutal-border-thick brutal-shadow-lg uppercase tracking-tight overflow-hidden"
+              className="group relative w-full px-16 py-10 font-black text-5xl text-brutal-white bg-brutal-black brutal-border-thick brutal-shadow-lg uppercase tracking-tight overflow-hidden"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
@@ -171,12 +171,12 @@ export function LandingScreen() {
                 whileHover={{ x: 0 }}
                 transition={{ duration: 0.3 }}
               />
-              <span className="relative z-10 flex items-center justify-center gap-4">
+              <span className="relative z-10 flex items-center justify-center gap-6">
                 START NOW
                 <motion.span
                   animate={{ x: [0, 10, 0] }}
                   transition={{ duration: 1, repeat: Infinity }}
-                  className="text-5xl"
+                  className="text-6xl"
                 >
                   →
                 </motion.span>

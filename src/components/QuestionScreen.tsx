@@ -112,28 +112,28 @@ export function QuestionScreen() {
         ))}
       </div>
 
-      <div className="absolute top-8 left-8 right-8 z-20 flex items-center justify-between">
+      <div className="absolute top-6 left-6 right-6 z-20 flex items-center justify-between">
         <motion.div
-          className="bg-brutal-white brutal-border-thick brutal-shadow px-6 py-4 transform -rotate-2"
+          className="bg-brutal-white brutal-border-thick brutal-shadow px-8 py-6 transform -rotate-2"
           initial={{ x: -100, opacity: 0, rotate: -10 }}
           animate={{ x: 0, opacity: 1, rotate: -2 }}
           transition={{ delay: 0.2, type: 'spring' }}
         >
-          <div className="text-brutal-black text-xs font-black uppercase mb-1">Round</div>
-          <div className="text-brutal-black font-black text-3xl">
+          <div className="text-brutal-black text-sm font-black uppercase mb-2">Round</div>
+          <div className="text-brutal-black font-black text-5xl">
             {currentQuestionIndex + 1}/{questions.length}
           </div>
         </motion.div>
 
         <motion.div
-          className="bg-brutal-black brutal-border-thick brutal-shadow px-6 py-4 transform rotate-2"
+          className="bg-brutal-black brutal-border-thick brutal-shadow px-8 py-6 transform rotate-2"
           initial={{ x: 100, opacity: 0, rotate: 10 }}
           animate={{ x: 0, opacity: 1, rotate: 2 }}
           transition={{ delay: 0.2, type: 'spring' }}
         >
-          <div className="text-neon-yellow text-xs font-black uppercase mb-1">Score</div>
+          <div className="text-neon-yellow text-sm font-black uppercase mb-2">Score</div>
           <motion.div
-            className="text-brutal-white font-black text-3xl"
+            className="text-brutal-white font-black text-5xl"
             key={score}
             animate={{ scale: [1, 1.3, 1] }}
             transition={{ duration: 0.3 }}
@@ -143,11 +143,11 @@ export function QuestionScreen() {
         </motion.div>
       </div>
 
-      <div className="flex-1 flex flex-col items-center justify-center px-8 pt-32 pb-48 relative z-10">
-        <div className="w-full max-w-6xl">
+      <div className="flex-1 flex flex-col items-center justify-center px-6 pt-36 pb-56 relative z-10">
+        <div className="w-full max-w-7xl">
           <motion.h2
             key={`question-${currentQuestionIndex}`}
-            className="font-display text-5xl md:text-7xl font-black text-brutal-black text-center mb-12 uppercase leading-tight tracking-tighter"
+            className="font-display text-6xl md:text-8xl font-black text-brutal-black text-center mb-10 uppercase leading-tight tracking-tighter"
             initial={{ y: -50, opacity: 0, scale: 0.8 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, type: 'spring', bounce: 0.5 }}
@@ -157,7 +157,7 @@ export function QuestionScreen() {
 
           <motion.div
             key={`image-${currentQuestionIndex}`}
-            className="relative mx-auto max-w-2xl"
+            className="relative mx-auto max-w-3xl"
             initial={{ scale: 0.8, opacity: 0, rotate: -5 }}
             animate={{
               scale: showAnticipation ? [1, 0.95, 1.05, 0.95, 1] : 1,
@@ -207,12 +207,12 @@ export function QuestionScreen() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 z-20 p-8">
-        <div className="max-w-6xl mx-auto">
+      <div className="absolute bottom-0 left-0 right-0 z-20 p-6">
+        <div className="max-w-7xl mx-auto">
           <AnimatePresence mode="wait">
             {!showFeedback && (
               <motion.div
-                className="grid grid-cols-2 gap-6"
+                className="grid grid-cols-2 gap-8"
                 initial={{ y: 100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: 100, opacity: 0 }}
@@ -222,7 +222,7 @@ export function QuestionScreen() {
                   id="answer-REAL"
                   onClick={() => handleAnswer('REAL')}
                   disabled={!!selectedAnswer}
-                  className={`relative px-10 py-8 font-black text-3xl uppercase tracking-tight overflow-hidden disabled:opacity-50 ${
+                  className={`relative px-12 py-12 font-black text-5xl uppercase tracking-tight overflow-hidden disabled:opacity-50 ${
                     showAnticipation && selectedAnswer === 'REAL' ? 'animate-tremble' : ''
                   }`}
                   style={{
@@ -239,8 +239,8 @@ export function QuestionScreen() {
                     boxShadow: '4px 4px 0px 0px #000000',
                   }}
                 >
-                  <span className="flex items-center justify-center gap-4 text-brutal-black">
-                    <span className="text-5xl">🧍</span>
+                  <span className="flex items-center justify-center gap-6 text-brutal-black">
+                    <span className="text-7xl">🧍</span>
                     REAL
                   </span>
                 </motion.button>
@@ -250,7 +250,7 @@ export function QuestionScreen() {
                     id="answer-AI"
                     onClick={() => handleAnswer('AI')}
                     disabled={!!selectedAnswer}
-                    className={`relative px-10 py-8 font-black text-3xl uppercase tracking-tight overflow-hidden disabled:opacity-50 ${
+                    className={`relative px-12 py-12 font-black text-5xl uppercase tracking-tight overflow-hidden disabled:opacity-50 ${
                       showAnticipation && selectedAnswer === 'AI' ? 'animate-tremble' : ''
                     }`}
                     style={{
@@ -267,8 +267,8 @@ export function QuestionScreen() {
                       boxShadow: '4px 4px 0px 0px #000000',
                     }}
                   >
-                    <span className="flex items-center justify-center gap-4 text-brutal-white">
-                      <span className="text-5xl">🤖</span>
+                    <span className="flex items-center justify-center gap-6 text-brutal-white">
+                      <span className="text-7xl">🤖</span>
                       AI
                     </span>
                   </motion.button>
