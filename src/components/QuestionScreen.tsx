@@ -25,6 +25,7 @@ export function QuestionScreen() {
 
   const isFinalQuestion = gameStatus === 'final';
   const isCorrect = selectedAnswer === currentQuestion.correctAnswer;
+  const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
 
   const handleAnswer = (answer: Answer) => {
     if (selectedAnswer) return; // Already answered
@@ -62,179 +63,249 @@ export function QuestionScreen() {
     setCheatAttempts(prev => prev + 1);
   };
 
-  const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
-
   return (
-    <div className="w-full h-full flex flex-col bg-gradient-to-br from-[#050816] via-[#1a103a] to-[#2d1654] relative overflow-hidden">
+    <div className="w-full h-full flex flex-col bg-gradient-to-br from-slate-900 via-purple-900 to-slate-800 relative overflow-hidden">
+      {/* Animated mesh gradient background */}
+      <div className="absolute inset-0 bg-mesh-gradient opacity-40"></div>
+
       {/* Progress bar */}
-      <div className="absolute top-0 left-0 right-0 h-3 bg-black/30">
+      <div className="absolute top-0 left-0 right-0 h-1.5 bg-black/20 z-30">
         <motion.div
-          className="h-full bg-gradient-to-r from-neon-pink via-neon-purple to-neon-blue"
+          className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500"
           initial={{ width: 0 }}
           animate={{ width: `${progress}%` }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
         />
       </div>
 
-      {/* Score display */}
-      <div className="absolute top-6 right-6 z-20">
-        <div className="bg-white px-6 py-3 brutal-border brutal-shadow text-black font-bold text-xl">
-          Score: {score}/{questions.length}
-        </div>
+      {/* Header with Score and Question Number */}
+      <div className="absolute top-6 left-6 right-6 z-20 flex items-center justify-between">
+        {/* Question number */}
+        <motion.div
+          className="glass-card px-6 py-3 rounded-xl"
+          initial={{ x: -50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
+          <div className="text-white/60 text-xs font-medium mb-1">Question</div>
+          <div className="text-white font-bold text-lg">
+            {currentQuestionIndex + 1} / {questions.length}
+          </div>
+        </motion.div>
+
+        {/* Score display */}
+        <motion.div
+          className="glass-card px-6 py-3 rounded-xl"
+          initial={{ x: 50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
+          <div className="text-white/60 text-xs font-medium mb-1">Score</div>
+          <div className="text-white font-bold text-lg">
+            {score} / {questions.length}
+          </div>
+        </motion.div>
       </div>
 
-      {/* Question number */}
-      <div className="absolute top-6 left-6 z-20">
-        <div className="bg-neon-yellow px-6 py-3 brutal-border brutal-shadow-sm text-black font-black text-xl">
-          Q{currentQuestionIndex + 1}/{questions.length}
-        </div>
-      </div>
-
-      {/* Main content */}
-      <div className="flex-1 flex items-center justify-center p-8">
-        <div className="w-full max-w-7xl grid grid-cols-2 gap-12 items-center">
-          {/* Left: Image */}
-          <motion.div
-            key={`image-${currentQuestionIndex}`}
-            className="relative"
-            initial={{ x: -100, opacity: 0, scale: 0.8 }}
-            animate={{ x: 0, opacity: 1, scale: 1 }}
-            exit={{ x: 100, opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.5, type: 'spring' }}
-          >
-            <div className="relative bg-white p-4 brutal-border brutal-shadow-lg rounded-3xl overflow-hidden">
-              <img
-                src={currentQuestion.imageUrl}
-                alt="Question"
-                className="w-full h-[500px] object-cover rounded-2xl"
-              />
-              {isFinalQuestion && (
-                <motion.div
-                  className="absolute top-8 right-8 bg-neon-pink px-4 py-2 brutal-border brutal-shadow-sm text-white font-bold text-lg rotate-12"
-                  initial={{ scale: 0, rotate: -180 }}
-                  animate={{ scale: 1, rotate: 12 }}
-                  transition={{ delay: 0.5, type: 'spring' }}
-                >
-                  THIS IS YOU! 📸
-                </motion.div>
-              )}
-            </div>
-          </motion.div>
-
-          {/* Right: Question & Answers */}
-          <div className="space-y-8">
-            {/* Question text */}
+      {/* Main content - Bento Box Layout */}
+      <div className="flex-1 flex items-center justify-center p-8 pt-32 relative z-10">
+        <div className="w-full max-w-7xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            {/* Left: Image Card */}
             <motion.div
-              key={`question-${currentQuestionIndex}`}
-              initial={{ x: 100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              key={`image-${currentQuestionIndex}`}
+              className="glass-strong rounded-3xl p-6 overflow-hidden"
+              initial={{ x: -50, opacity: 0, scale: 0.95 }}
+              animate={{ x: 0, opacity: 1, scale: 1 }}
+              exit={{ x: -50, opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.5, type: 'spring', bounce: 0.3 }}
             >
-              <h2 className="text-5xl font-black text-white mb-4 leading-tight">
-                {currentQuestion.prompt}
-              </h2>
-              {isFinalQuestion && cheatAttempts > 0 && (
-                <motion.p
-                  className="text-2xl text-neon-yellow font-bold"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                >
-                  😏 Nice try! Attempts: {cheatAttempts}
-                </motion.p>
-              )}
+              <div className="relative aspect-square rounded-2xl overflow-hidden bg-black/20">
+                <img
+                  src={currentQuestion.imageUrl}
+                  alt="Question"
+                  className="w-full h-full object-cover"
+                />
+                {isFinalQuestion && (
+                  <motion.div
+                    className="absolute top-4 right-4 glass-card px-4 py-2 rounded-xl border border-pink-400/50"
+                    initial={{ scale: 0, rotate: -10 }}
+                    animate={{ scale: 1, rotate: 3 }}
+                    transition={{ delay: 0.3, type: 'spring' }}
+                  >
+                    <span className="text-white font-bold text-sm flex items-center gap-2">
+                      📸 That's You!
+                    </span>
+                  </motion.div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+              </div>
             </motion.div>
 
-            {/* Answer buttons */}
-            <AnimatePresence mode="wait">
-              {!showFeedback && (
-                <motion.div
-                  className="space-y-6"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ delay: 0.4 }}
+            {/* Right: Question & Answers Card */}
+            <motion.div
+              key={`content-${currentQuestionIndex}`}
+              className="glass-strong rounded-3xl p-8 space-y-6"
+              initial={{ x: 50, opacity: 0, scale: 0.95 }}
+              animate={{ x: 0, opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.1, type: 'spring', bounce: 0.3 }}
+            >
+              {/* Question text */}
+              <div>
+                <motion.h2
+                  className="text-4xl lg:text-5xl font-black text-white leading-tight mb-3"
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.3 }}
                 >
-                  {/* REAL button */}
-                  <motion.button
-                    id="answer-REAL"
-                    onClick={() => handleAnswer('REAL')}
-                    disabled={!!selectedAnswer}
-                    className="w-full px-12 py-8 text-4xl font-black text-white bg-emerald-500 brutal-border brutal-shadow-lg rounded-2xl hover:bg-emerald-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                    whileHover={{ scale: 1.02, x: 4, y: 4 }}
-                    whileTap={{ scale: 0.98 }}
+                  {currentQuestion.prompt}
+                </motion.h2>
+                {isFinalQuestion && cheatAttempts > 0 && (
+                  <motion.div
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-yellow-500/20 border border-yellow-400/30"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
                   >
-                    🧍 REAL
-                  </motion.button>
+                    <span className="text-yellow-300 font-bold text-sm">
+                      😏 Nice try! Attempts: {cheatAttempts}
+                    </span>
+                  </motion.div>
+                )}
+              </div>
 
-                  {/* AI button - normal or dodging */}
-                  {!isFinalQuestion ? (
+              {/* Answer buttons */}
+              <AnimatePresence mode="wait">
+                {!showFeedback && (
+                  <motion.div
+                    className="space-y-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ delay: 0.4 }}
+                  >
+                    {/* REAL button */}
                     <motion.button
-                      id="answer-AI"
-                      onClick={() => handleAnswer('AI')}
+                      id="answer-REAL"
+                      onClick={() => handleAnswer('REAL')}
                       disabled={!!selectedAnswer}
-                      className="w-full px-12 py-8 text-4xl font-black text-white bg-neon-purple brutal-border brutal-shadow-lg rounded-2xl hover:bg-purple-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                      whileHover={{ scale: 1.02, x: 4, y: 4 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      🤖 AI
-                    </motion.button>
-                  ) : (
-                    <DodgingAIButton onCheat={handleCheatAttempt} />
-                  )}
-                </motion.div>
-              )}
-
-              {/* Feedback */}
-              {showFeedback && (
-                <motion.div
-                  className="space-y-6"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                >
-                  <div className={`p-8 brutal-border brutal-shadow-lg rounded-2xl ${
-                    isCorrect
-                      ? 'bg-emerald-400 text-black'
-                      : 'bg-red-400 text-black'
-                  }`}>
-                    <p className="text-4xl font-black mb-4">
-                      {isCorrect ? '✅ Correct!' : '❌ Oops!'}
-                    </p>
-                    <p className="text-xl font-bold">
-                      {currentQuestion.funFact}
-                    </p>
-                  </div>
-
-                  {!isLastQuestion && (
-                    <motion.button
-                      onClick={handleNext}
-                      className="w-full px-12 py-6 text-3xl font-black text-black bg-neon-yellow brutal-border brutal-shadow-lg rounded-2xl hover:bg-neon-green transition-all"
+                      className="group relative w-full px-8 py-6 text-2xl font-bold rounded-xl overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed"
+                      style={{
+                        background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                      }}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: 0.3 }}
                     >
-                      Next Question →
+                      <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-green-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                      <span className="relative z-10 flex items-center justify-center gap-3 text-white">
+                        <span className="text-3xl">🧍</span>
+                        REAL Human
+                      </span>
                     </motion.button>
-                  )}
 
-                  {isLastQuestion && (
-                    <motion.button
-                      onClick={handleNext}
-                      className="w-full px-12 py-6 text-3xl font-black text-black bg-neon-pink brutal-border brutal-shadow-lg rounded-2xl hover:bg-pink-500 transition-all"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: 0.3 }}
+                    {/* AI button - normal or dodging */}
+                    {!isFinalQuestion ? (
+                      <motion.button
+                        id="answer-AI"
+                        onClick={() => handleAnswer('AI')}
+                        disabled={!!selectedAnswer}
+                        className="group relative w-full px-8 py-6 text-2xl font-bold rounded-xl overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed"
+                        style={{
+                          background: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)',
+                        }}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-violet-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <span className="relative z-10 flex items-center justify-center gap-3 text-white">
+                          <span className="text-3xl">🤖</span>
+                          AI Generated
+                        </span>
+                      </motion.button>
+                    ) : (
+                      <DodgingAIButton onCheat={handleCheatAttempt} />
+                    )}
+                  </motion.div>
+                )}
+
+                {/* Feedback */}
+                {showFeedback && (
+                  <motion.div
+                    className="space-y-4"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                  >
+                    <motion.div
+                      className={`glass-card p-6 rounded-2xl border-2 ${
+                        isCorrect
+                          ? 'border-emerald-400/50 bg-emerald-500/10'
+                          : 'border-red-400/50 bg-red-500/10'
+                      }`}
+                      initial={{ y: 20 }}
+                      animate={{ y: 0 }}
                     >
-                      See Results! 🎉
-                    </motion.button>
-                  )}
-                </motion.div>
-              )}
-            </AnimatePresence>
+                      <div className={`flex items-center gap-3 mb-3 ${
+                        isCorrect ? 'text-emerald-300' : 'text-red-300'
+                      }`}>
+                        <span className="text-3xl">{isCorrect ? '✅' : '❌'}</span>
+                        <h3 className="text-2xl font-black">
+                          {isCorrect ? 'Correct!' : 'Not quite!'}
+                        </h3>
+                      </div>
+                      <p className="text-white/90 text-base font-medium leading-relaxed">
+                        {currentQuestion.funFact}
+                      </p>
+                    </motion.div>
+
+                    {!isLastQuestion && (
+                      <motion.button
+                        onClick={handleNext}
+                        className="group relative w-full px-8 py-5 text-xl font-bold rounded-xl overflow-hidden"
+                        style={{
+                          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                        }}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <span className="relative z-10 flex items-center justify-center gap-2 text-white">
+                          Next Question
+                          <motion.span
+                            animate={{ x: [0, 5, 0] }}
+                            transition={{ duration: 1, repeat: Infinity }}
+                          >
+                            →
+                          </motion.span>
+                        </span>
+                      </motion.button>
+                    )}
+
+                    {isLastQuestion && (
+                      <motion.button
+                        onClick={handleNext}
+                        className="group relative w-full px-8 py-5 text-xl font-bold rounded-xl overflow-hidden"
+                        style={{
+                          background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                        }}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <span className="relative z-10 flex items-center justify-center gap-2 text-white">
+                          See Results 🎉
+                        </span>
+                      </motion.button>
+                    )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
           </div>
         </div>
       </div>

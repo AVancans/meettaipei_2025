@@ -16,27 +16,31 @@ export function CompleteScreen() {
   const getMessage = () => {
     if (percentage === 100) {
       return {
-        title: "🏆 PERFECT SCORE!",
-        subtitle: "You're definitely human... or are you? 🤔",
-        color: "bg-neon-green"
+        title: "Perfect Score!",
+        emoji: "🏆",
+        subtitle: "You're definitely human... or are you?",
+        gradient: "from-yellow-400 via-amber-400 to-orange-500"
       };
     } else if (percentage >= 80) {
       return {
-        title: "🎉 AMAZING!",
+        title: "Amazing!",
+        emoji: "🎉",
         subtitle: "You're (probably) human!",
-        color: "bg-neon-blue"
+        gradient: "from-purple-400 via-pink-400 to-cyan-400"
       };
     } else if (percentage >= 60) {
       return {
-        title: "👍 NOT BAD!",
+        title: "Not Bad!",
+        emoji: "👍",
         subtitle: "Pretty sure you're human!",
-        color: "bg-neon-yellow"
+        gradient: "from-blue-400 via-cyan-400 to-teal-400"
       };
     } else {
       return {
-        title: "🤖 SUSPICIOUS...",
+        title: "Suspicious...",
+        emoji: "🤖",
         subtitle: "Are you SURE you're not an AI?",
-        color: "bg-neon-pink"
+        gradient: "from-pink-400 via-purple-400 to-indigo-400"
       };
     }
   };
@@ -44,20 +48,26 @@ export function CompleteScreen() {
   const message = getMessage();
 
   return (
-    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#050816] via-[#1a103a] to-[#2d1654] relative overflow-hidden">
-      {/* Animated background blobs */}
+    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-800 relative overflow-hidden">
+      {/* Animated mesh gradient background */}
+      <div className="absolute inset-0 bg-mesh-gradient opacity-40"></div>
+
+      {/* Animated gradient orbs */}
       <div className="absolute inset-0 overflow-hidden">
-        {Array.from({ length: 10 }).map((_, i) => (
+        {Array.from({ length: 8 }).map((_, i) => (
           <motion.div
             key={i}
-            className={`absolute rounded-full blur-2xl ${
-              i % 3 === 0 ? 'bg-neon-pink/20' : i % 3 === 1 ? 'bg-neon-blue/20' : 'bg-neon-yellow/20'
-            }`}
+            className="absolute rounded-full opacity-20 blur-3xl"
             style={{
-              width: `${100 + Math.random() * 200}px`,
-              height: `${100 + Math.random() * 200}px`,
+              width: `${150 + Math.random() * 150}px`,
+              height: `${150 + Math.random() * 150}px`,
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
+              background: `radial-gradient(circle, ${
+                i % 3 === 0 ? 'rgba(139, 92, 246, 0.4)' :
+                i % 3 === 1 ? 'rgba(236, 72, 153, 0.4)' :
+                'rgba(6, 182, 212, 0.4)'
+              } 0%, transparent 70%)`
             }}
             animate={{
               x: [0, Math.random() * 100 - 50, 0],
@@ -65,7 +75,7 @@ export function CompleteScreen() {
               scale: [1, 1.2, 1],
             }}
             transition={{
-              duration: 5 + Math.random() * 5,
+              duration: 8 + Math.random() * 4,
               repeat: Infinity,
               ease: 'easeInOut',
             }}
@@ -74,138 +84,195 @@ export function CompleteScreen() {
       </div>
 
       {/* Main content */}
-      <div className="relative z-10 text-center px-8 max-w-5xl">
-        {/* Trophy/Icon */}
-        <motion.div
-          className="text-9xl mb-8"
-          initial={{ scale: 0, rotate: -180 }}
-          animate={{ scale: 1, rotate: 0 }}
-          transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-        >
-          🎊
-        </motion.div>
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-8">
+        <div className="glass-strong rounded-3xl p-12">
+          {/* Trophy/Icon */}
+          <motion.div
+            className="text-8xl mb-6 text-center"
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ type: 'spring', stiffness: 200, damping: 15 }}
+          >
+            {message.emoji}
+          </motion.div>
 
-        {/* Title */}
-        <motion.h1
-          className="text-8xl font-black mb-8 text-white"
-          initial={{ y: -50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.2, type: 'spring' }}
-        >
-          <span className={`inline-block ${message.color} px-12 py-6 brutal-shadow-lg brutal-border rounded-3xl`}>
+          {/* Title */}
+          <motion.h1
+            className={`text-6xl md:text-7xl font-black mb-4 text-center bg-gradient-to-r ${message.gradient} bg-clip-text text-transparent`}
+            initial={{ y: -30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2, type: 'spring' }}
+          >
             {message.title}
-          </span>
-        </motion.h1>
+          </motion.h1>
 
-        {/* Subtitle */}
-        <motion.p
-          className="text-4xl text-white font-bold mb-12"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-        >
-          {message.subtitle}
-        </motion.p>
-
-        {/* Score display */}
-        <motion.div
-          className="bg-white px-16 py-12 brutal-border brutal-shadow-lg rounded-3xl mb-12 inline-block"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 0.6, type: 'spring', stiffness: 200 }}
-        >
-          <div className="text-8xl font-black text-black mb-4">
-            {score}/{questions.length}
-          </div>
-          <div className="text-3xl font-bold text-black/70">
-            {percentage}% Correct
-          </div>
-        </motion.div>
-
-        {/* Fun stats */}
-        <motion.div
-          className="grid grid-cols-3 gap-6 mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-        >
-          <div className="bg-neon-pink px-6 py-4 brutal-border brutal-shadow rounded-2xl">
-            <div className="text-4xl font-black text-white mb-2">{score}</div>
-            <div className="text-sm font-bold text-white/80">Correct</div>
-          </div>
-          <div className="bg-neon-purple px-6 py-4 brutal-border brutal-shadow rounded-2xl">
-            <div className="text-4xl font-black text-white mb-2">{questions.length - score}</div>
-            <div className="text-sm font-bold text-white/80">AI Fooled You</div>
-          </div>
-          <div className="bg-neon-blue px-6 py-4 brutal-border brutal-shadow rounded-2xl">
-            <div className="text-4xl font-black text-white mb-2">100%</div>
-            <div className="text-sm font-bold text-white/80">Fun Had</div>
-          </div>
-        </motion.div>
-
-        {/* Action buttons */}
-        <motion.div
-          className="flex gap-6 justify-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1 }}
-        >
-          <motion.button
-            onClick={resetGame}
-            className="px-12 py-6 text-3xl font-black text-black bg-neon-yellow brutal-border brutal-shadow-lg rounded-2xl hover:bg-neon-green transition-all"
-            whileHover={{ scale: 1.05, rotate: -2 }}
-            whileTap={{ scale: 0.95 }}
+          {/* Subtitle */}
+          <motion.p
+            className="text-2xl text-white/70 font-medium mb-10 text-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
           >
-            🔄 Play Again
-          </motion.button>
+            {message.subtitle}
+          </motion.p>
 
-          <motion.button
-            onClick={() => {
-              // Open QR code or external link
-              console.log('Learn more about the project');
-            }}
-            className="px-12 py-6 text-3xl font-black text-white bg-neon-purple brutal-border brutal-shadow-lg rounded-2xl hover:bg-purple-600 transition-all"
-            whileHover={{ scale: 1.05, rotate: 2 }}
-            whileTap={{ scale: 0.95 }}
+          {/* Score display card */}
+          <motion.div
+            className="glass-card p-8 rounded-2xl mb-8 border border-white/20"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.4, type: 'spring' }}
           >
-            📱 Learn More
-          </motion.button>
-        </motion.div>
+            <div className="text-center mb-6">
+              <div className="text-7xl font-black text-white mb-2">
+                {score}/{questions.length}
+              </div>
+              <div className="text-2xl font-bold text-white/60">
+                {percentage}% Accuracy
+              </div>
+            </div>
 
-        {/* Footer message */}
-        <motion.p
-          className="mt-12 text-xl text-white/60 font-semibold"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-        >
-          Thanks for playing! 🎮✨
-        </motion.p>
+            {/* Circular progress */}
+            <div className="relative w-48 h-48 mx-auto mb-6">
+              <svg className="transform -rotate-90 w-48 h-48">
+                <circle
+                  cx="96"
+                  cy="96"
+                  r="88"
+                  stroke="rgba(255, 255, 255, 0.1)"
+                  strokeWidth="12"
+                  fill="none"
+                />
+                <motion.circle
+                  cx="96"
+                  cy="96"
+                  r="88"
+                  stroke="url(#gradient)"
+                  strokeWidth="12"
+                  fill="none"
+                  strokeLinecap="round"
+                  initial={{ strokeDasharray: '0 552' }}
+                  animate={{ strokeDasharray: `${(percentage / 100) * 552} 552` }}
+                  transition={{ duration: 1.5, delay: 0.5, ease: 'easeOut' }}
+                />
+                <defs>
+                  <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#8b5cf6" />
+                    <stop offset="50%" stopColor="#ec4899" />
+                    <stop offset="100%" stopColor="#06b6d4" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-4xl font-black text-white">{percentage}%</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Fun stats */}
+          <motion.div
+            className="grid grid-cols-3 gap-4 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+          >
+            <motion.div
+              className="glass rounded-2xl p-6 text-center border border-purple-400/30"
+              whileHover={{ scale: 1.05, backgroundColor: 'rgba(139, 92, 246, 0.1)' }}
+            >
+              <div className="text-4xl font-black text-purple-400 mb-2">{score}</div>
+              <div className="text-xs font-medium text-white/60">Correct</div>
+            </motion.div>
+            <motion.div
+              className="glass rounded-2xl p-6 text-center border border-pink-400/30"
+              whileHover={{ scale: 1.05, backgroundColor: 'rgba(236, 72, 153, 0.1)' }}
+            >
+              <div className="text-4xl font-black text-pink-400 mb-2">{questions.length - score}</div>
+              <div className="text-xs font-medium text-white/60">Tricked</div>
+            </motion.div>
+            <motion.div
+              className="glass rounded-2xl p-6 text-center border border-cyan-400/30"
+              whileHover={{ scale: 1.05, backgroundColor: 'rgba(6, 182, 212, 0.1)' }}
+            >
+              <div className="text-4xl font-black text-cyan-400 mb-2">100%</div>
+              <div className="text-xs font-medium text-white/60">Fun</div>
+            </motion.div>
+          </motion.div>
+
+          {/* Action buttons */}
+          <motion.div
+            className="flex gap-4 justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+          >
+            <motion.button
+              onClick={resetGame}
+              className="group relative px-10 py-4 text-lg font-bold rounded-xl overflow-hidden flex-1"
+              style={{
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <span className="relative z-10 flex items-center justify-center gap-2 text-white">
+                🔄 Play Again
+              </span>
+            </motion.button>
+
+            <motion.button
+              onClick={() => {
+                // Open QR code or external link
+                console.log('Learn more about the project');
+              }}
+              className="group relative px-10 py-4 text-lg font-bold rounded-xl overflow-hidden flex-1"
+              style={{
+                background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+              }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <span className="relative z-10 flex items-center justify-center gap-2 text-white">
+                📱 Learn More
+              </span>
+            </motion.button>
+          </motion.div>
+
+          {/* Footer message */}
+          <motion.p
+            className="mt-8 text-center text-sm text-white/50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+          >
+            Thanks for playing! Made with AI & ❤️
+          </motion.p>
+        </div>
       </div>
 
-      {/* Floating emojis */}
-      {['🎉', '🎊', '⭐', '✨', '🌟', '💫', '🎯', '🏆'].map((emoji, i) => (
+      {/* Floating particles */}
+      {Array.from({ length: 30 }).map((_, i) => (
         <motion.div
           key={i}
-          className="absolute text-6xl"
+          className="absolute w-1 h-1 bg-white rounded-full"
           style={{
-            left: `${(i * 12 + 5)}%`,
-            top: `${(i * 10 + 10)}%`
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
           }}
           animate={{
-            y: [0, -50, 0],
-            rotate: [0, 360],
-            opacity: [0.4, 0.8, 0.4]
+            y: [0, -100, 0],
+            opacity: [0, 0.8, 0],
+            scale: [0, 1.5, 0],
           }}
           transition={{
-            duration: 3 + i * 0.5,
+            duration: 3 + Math.random() * 2,
             repeat: Infinity,
-            ease: 'easeInOut',
-            delay: i * 0.2
+            delay: Math.random() * 3,
+            ease: 'easeInOut'
           }}
-        >
-          {emoji}
-        </motion.div>
+        />
       ))}
     </div>
   );
