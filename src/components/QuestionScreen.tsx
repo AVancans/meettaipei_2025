@@ -57,9 +57,9 @@ export function QuestionScreen() {
         if (!isLastQuestion) {
           setTimeout(() => {
             handleNext();
-          }, 2500);
+          }, 800);
         }
-      }, 1000);
+      }, 1500);
     }, 1000);
   };
 
@@ -143,36 +143,32 @@ export function QuestionScreen() {
         </motion.div>
       </div>
 
-      <div className="flex-1 flex flex-col items-center justify-center px-6 pt-36 pb-56 relative z-10">
-        <div className="w-full max-w-7xl">
+      <div className="flex-1 flex items-center justify-center px-8 py-8 relative z-10">
+        <div className="w-full max-w-7xl h-full flex flex-col justify-center gap-8">
           <motion.h2
             key={`question-${currentQuestionIndex}`}
-            className="font-display text-6xl md:text-8xl font-black text-brutal-black text-center mb-10 uppercase leading-tight tracking-tighter"
+            className="font-display text-7xl font-black text-brutal-black text-center uppercase leading-none tracking-tighter"
             initial={{ y: -50, opacity: 0, scale: 0.8 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, type: 'spring', bounce: 0.5 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
           >
             {currentQuestion.prompt}
           </motion.h2>
 
           <motion.div
             key={`image-${currentQuestionIndex}`}
-            className="relative mx-auto max-w-3xl"
-            initial={{ scale: 0.8, opacity: 0, rotate: -5 }}
+            className="relative mx-auto w-full max-w-4xl flex-shrink-0"
+            initial={{ scale: 0.9, opacity: 0 }}
             animate={{
-              scale: showAnticipation ? [1, 0.95, 1.05, 0.95, 1] : 1,
-              opacity: 1,
-              rotate: 0
+              scale: 1,
+              opacity: 1
             }}
-            transition={{
-              scale: showAnticipation ? { duration: 1, repeat: 0 } : { duration: 0.5, type: 'spring' },
-              opacity: { duration: 0.5 },
-              rotate: { duration: 0.5, type: 'spring' }
-            }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
           >
-            <div className="bg-brutal-white brutal-border-thick brutal-shadow-xl p-4 transform -rotate-1">
-              <div className="relative aspect-square overflow-hidden bg-brutal-black">
+            <div className="bg-brutal-white brutal-border-thick brutal-shadow-xl p-8 transform -rotate-1">
+              <div className="relative aspect-square overflow-hidden bg-brutal-black brutal-border-thick">
                 <img
+                  key={currentQuestion.imageUrl}
                   src={currentQuestion.imageUrl}
                   alt="Question"
                   className="w-full h-full object-cover"
@@ -207,7 +203,7 @@ export function QuestionScreen() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 z-20 p-6">
+      <div className="absolute bottom-0 left-0 right-0 z-20 p-8">
         <div className="max-w-7xl mx-auto">
           <AnimatePresence mode="wait">
             {!showFeedback && (
@@ -280,7 +276,7 @@ export function QuestionScreen() {
               </motion.div>
             )}
 
-            {showFeedback && (
+            {false && (
               <motion.div
                 className="space-y-6"
                 initial={{ y: 100, opacity: 0 }}
@@ -303,7 +299,7 @@ export function QuestionScreen() {
                     </h3>
                   </div>
                   <p className="text-brutal-black text-xl font-bold leading-relaxed uppercase">
-                    {currentQuestion.funFact}
+                    {currentQuestion?.funFact}
                   </p>
                 </motion.div>
 
