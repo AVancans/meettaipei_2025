@@ -9,38 +9,37 @@ export function CompleteScreen() {
   const percentage = Math.round((score / questions.length) * 100);
 
   useEffect(() => {
-    // Fire continuous confetti for 5 seconds
     fireConfettiContinuous(5000);
   }, []);
 
   const getMessage = () => {
     if (percentage === 100) {
       return {
-        title: "Perfect Score!",
+        title: "PERFECT!",
         emoji: "🏆",
-        subtitle: "You're definitely human... or are you?",
-        gradient: "from-yellow-400 via-amber-400 to-orange-500"
+        subtitle: "YOU'RE A LEGEND!",
+        bg: "bg-neon-yellow"
       };
     } else if (percentage >= 80) {
       return {
-        title: "Amazing!",
+        title: "AMAZING!",
         emoji: "🎉",
-        subtitle: "You're (probably) human!",
-        gradient: "from-purple-400 via-pink-400 to-cyan-400"
+        subtitle: "YOU CRUSHED IT!",
+        bg: "bg-neon-lime"
       };
     } else if (percentage >= 60) {
       return {
-        title: "Not Bad!",
+        title: "NOT BAD!",
         emoji: "👍",
-        subtitle: "Pretty sure you're human!",
-        gradient: "from-blue-400 via-cyan-400 to-teal-400"
+        subtitle: "SOLID PERFORMANCE!",
+        bg: "bg-neon-cyan"
       };
     } else {
       return {
-        title: "Suspicious...",
+        title: "SUSPICIOUS!",
         emoji: "🤖",
-        subtitle: "Are you SURE you're not an AI?",
-        gradient: "from-pink-400 via-purple-400 to-indigo-400"
+        subtitle: "ARE YOU EVEN HUMAN?",
+        bg: "bg-neon-magenta"
       };
     }
   };
@@ -48,232 +47,238 @@ export function CompleteScreen() {
   const message = getMessage();
 
   return (
-    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-800 relative overflow-hidden">
-      {/* Animated mesh gradient background */}
-      <div className="absolute inset-0 bg-mesh-gradient opacity-40"></div>
+    <div className="w-full h-full flex items-center justify-center bg-neon-orange relative overflow-hidden">
+      <div className="absolute inset-0 bg-grid-pattern opacity-15"></div>
+      <div className="absolute inset-0 bg-noise"></div>
 
-      {/* Animated gradient orbs */}
-      <div className="absolute inset-0 overflow-hidden">
-        {Array.from({ length: 8 }).map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full opacity-20 blur-3xl"
-            style={{
-              width: `${150 + Math.random() * 150}px`,
-              height: `${150 + Math.random() * 150}px`,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              background: `radial-gradient(circle, ${
-                i % 3 === 0 ? 'rgba(139, 92, 246, 0.4)' :
-                i % 3 === 1 ? 'rgba(236, 72, 153, 0.4)' :
-                'rgba(6, 182, 212, 0.4)'
-              } 0%, transparent 70%)`
-            }}
-            animate={{
-              x: [0, Math.random() * 100 - 50, 0],
-              y: [0, Math.random() * 100 - 50, 0],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: 8 + Math.random() * 4,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-          />
-        ))}
-      </div>
+      {Array.from({ length: 12 }).map((_, i) => (
+        <motion.div
+          key={i}
+          className={`absolute ${
+            i % 4 === 0 ? 'bg-neon-yellow' :
+            i % 4 === 1 ? 'bg-neon-magenta' :
+            i % 4 === 2 ? 'bg-neon-cyan' : 'bg-neon-lime'
+          } brutal-border-thick`}
+          style={{
+            width: `${60 + Math.random() * 60}px`,
+            height: `${60 + Math.random() * 60}px`,
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            transform: `rotate(${Math.random() * 360}deg)`
+          }}
+          animate={{
+            y: [0, -30, 0],
+            rotate: [0, 15, 0],
+          }}
+          transition={{
+            duration: 3 + Math.random() * 2,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
+      ))}
 
-      {/* Main content */}
-      <div className="relative z-10 w-full max-w-4xl mx-auto px-8">
-        <div className="glass-strong rounded-3xl p-12">
-          {/* Trophy/Icon */}
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-8">
+        <motion.div
+          className="bg-brutal-white brutal-border-thick brutal-shadow-xl p-12 transform rotate-1"
+          initial={{ scale: 0, rotate: -45 }}
+          animate={{ scale: 1, rotate: 1 }}
+          transition={{ duration: 0.6, type: 'spring', bounce: 0.5 }}
+        >
           <motion.div
-            className="text-8xl mb-6 text-center"
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ type: 'spring', stiffness: 200, damping: 15 }}
+            className={`${message.bg} brutal-border-thick p-8 mb-8 transform -rotate-2`}
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.3, type: 'spring', bounce: 0.6 }}
           >
-            {message.emoji}
+            <motion.div
+              className="text-9xl mb-4 text-center"
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ delay: 0.4, type: 'spring', bounce: 0.7 }}
+            >
+              {message.emoji}
+            </motion.div>
+
+            <motion.h1
+              className="font-display text-7xl md:text-9xl font-black text-brutal-black text-center mb-4 uppercase leading-none tracking-tighter"
+              initial={{ y: -50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.5, type: 'spring' }}
+            >
+              {message.title}
+            </motion.h1>
+
+            <motion.p
+              className="text-3xl text-brutal-black font-black text-center uppercase tracking-tight"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              {message.subtitle}
+            </motion.p>
           </motion.div>
 
-          {/* Title */}
-          <motion.h1
-            className={`text-6xl md:text-7xl font-black mb-4 text-center bg-gradient-to-r ${message.gradient} bg-clip-text text-transparent`}
-            initial={{ y: -30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2, type: 'spring' }}
-          >
-            {message.title}
-          </motion.h1>
-
-          {/* Subtitle */}
-          <motion.p
-            className="text-2xl text-white/70 font-medium mb-10 text-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-          >
-            {message.subtitle}
-          </motion.p>
-
-          {/* Score display card */}
           <motion.div
-            className="glass-card p-8 rounded-2xl mb-8 border border-white/20"
-            initial={{ scale: 0.9, opacity: 0 }}
+            className="bg-brutal-black brutal-border-thick brutal-shadow-lg p-10 mb-8 transform rotate-2"
+            initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.4, type: 'spring' }}
+            transition={{ delay: 0.7, type: 'spring' }}
           >
             <div className="text-center mb-6">
-              <div className="text-7xl font-black text-white mb-2">
+              <motion.div
+                className="text-9xl font-black text-neon-yellow mb-2"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.8, type: 'spring', bounce: 0.6 }}
+              >
                 {score}/{questions.length}
-              </div>
-              <div className="text-2xl font-bold text-white/60">
-                {percentage}% Accuracy
+              </motion.div>
+              <div className="text-4xl font-black text-brutal-white uppercase">
+                {percentage}% ACCURACY
               </div>
             </div>
 
-            {/* Circular progress */}
-            <div className="relative w-48 h-48 mx-auto mb-6">
-              <svg className="transform -rotate-90 w-48 h-48">
+            <div className="relative w-64 h-64 mx-auto">
+              <svg className="transform -rotate-90 w-64 h-64">
                 <circle
-                  cx="96"
-                  cy="96"
-                  r="88"
-                  stroke="rgba(255, 255, 255, 0.1)"
-                  strokeWidth="12"
+                  cx="128"
+                  cy="128"
+                  r="112"
+                  stroke="#FFFFFF"
+                  strokeWidth="16"
                   fill="none"
+                  opacity="0.2"
                 />
                 <motion.circle
-                  cx="96"
-                  cy="96"
-                  r="88"
-                  stroke="url(#gradient)"
-                  strokeWidth="12"
+                  cx="128"
+                  cy="128"
+                  r="112"
+                  stroke="#F7FF00"
+                  strokeWidth="16"
                   fill="none"
-                  strokeLinecap="round"
-                  initial={{ strokeDasharray: '0 552' }}
-                  animate={{ strokeDasharray: `${(percentage / 100) * 552} 552` }}
-                  transition={{ duration: 1.5, delay: 0.5, ease: 'easeOut' }}
+                  strokeLinecap="square"
+                  initial={{ strokeDasharray: '0 704' }}
+                  animate={{ strokeDasharray: `${(percentage / 100) * 704} 704` }}
+                  transition={{ duration: 2, delay: 0.9, ease: 'easeOut' }}
                 />
-                <defs>
-                  <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#8b5cf6" />
-                    <stop offset="50%" stopColor="#ec4899" />
-                    <stop offset="100%" stopColor="#06b6d4" />
-                  </linearGradient>
-                </defs>
               </svg>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-4xl font-black text-white">{percentage}%</span>
-              </div>
+              <motion.div
+                className="absolute inset-0 flex items-center justify-center"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 1.2, type: 'spring', bounce: 0.6 }}
+              >
+                <span className="text-6xl font-black text-brutal-white">{percentage}%</span>
+              </motion.div>
             </div>
           </motion.div>
 
-          {/* Fun stats */}
           <motion.div
-            className="grid grid-cols-3 gap-4 mb-8"
-            initial={{ opacity: 0, y: 20 }}
+            className="grid grid-cols-3 gap-6 mb-8"
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
+            transition={{ delay: 1 }}
           >
             <motion.div
-              className="glass rounded-2xl p-6 text-center border border-purple-400/30"
-              whileHover={{ scale: 1.05, backgroundColor: 'rgba(139, 92, 246, 0.1)' }}
+              className="bg-neon-lime brutal-border-thick brutal-shadow p-6 text-center transform -rotate-2"
+              whileHover={{
+                rotate: 2,
+                y: -8,
+                boxShadow: '12px 12px 0px 0px #000000'
+              }}
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 1.1, type: 'spring', bounce: 0.6 }}
             >
-              <div className="text-4xl font-black text-purple-400 mb-2">{score}</div>
-              <div className="text-xs font-medium text-white/60">Correct</div>
+              <div className="text-6xl font-black text-brutal-black mb-2">{score}</div>
+              <div className="text-sm font-black text-brutal-black uppercase">Correct</div>
             </motion.div>
+
             <motion.div
-              className="glass rounded-2xl p-6 text-center border border-pink-400/30"
-              whileHover={{ scale: 1.05, backgroundColor: 'rgba(236, 72, 153, 0.1)' }}
+              className="bg-neon-magenta brutal-border-thick brutal-shadow p-6 text-center transform rotate-2"
+              whileHover={{
+                rotate: -2,
+                y: -8,
+                boxShadow: '12px 12px 0px 0px #000000'
+              }}
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 1.2, type: 'spring', bounce: 0.6 }}
             >
-              <div className="text-4xl font-black text-pink-400 mb-2">{questions.length - score}</div>
-              <div className="text-xs font-medium text-white/60">Tricked</div>
+              <div className="text-6xl font-black text-brutal-white mb-2">{questions.length - score}</div>
+              <div className="text-sm font-black text-brutal-white uppercase">Wrong</div>
             </motion.div>
+
             <motion.div
-              className="glass rounded-2xl p-6 text-center border border-cyan-400/30"
-              whileHover={{ scale: 1.05, backgroundColor: 'rgba(6, 182, 212, 0.1)' }}
+              className="bg-neon-cyan brutal-border-thick brutal-shadow p-6 text-center transform -rotate-2"
+              whileHover={{
+                rotate: 2,
+                y: -8,
+                boxShadow: '12px 12px 0px 0px #000000'
+              }}
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 1.3, type: 'spring', bounce: 0.6 }}
             >
-              <div className="text-4xl font-black text-cyan-400 mb-2">100%</div>
-              <div className="text-xs font-medium text-white/60">Fun</div>
+              <div className="text-6xl font-black text-brutal-black mb-2">100%</div>
+              <div className="text-sm font-black text-brutal-black uppercase">Fun</div>
             </motion.div>
           </motion.div>
 
-          {/* Action buttons */}
           <motion.div
-            className="flex gap-4 justify-center"
-            initial={{ opacity: 0, y: 20 }}
+            className="grid grid-cols-2 gap-6"
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
+            transition={{ delay: 1.4 }}
           >
             <motion.button
               onClick={resetGame}
-              className="group relative px-10 py-4 text-lg font-bold rounded-xl overflow-hidden flex-1"
-              style={{
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              className="px-10 py-6 font-black text-2xl bg-brutal-black brutal-border-thick brutal-shadow-lg uppercase tracking-tight"
+              whileHover={{
+                y: -4,
+                boxShadow: '16px 16px 0px 0px #000000',
               }}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              whileTap={{
+                y: 0,
+                boxShadow: '4px 4px 0px 0px #000000',
+              }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              <span className="relative z-10 flex items-center justify-center gap-2 text-white">
-                🔄 Play Again
+              <span className="flex items-center justify-center gap-3 text-brutal-white">
+                🔄 AGAIN
               </span>
             </motion.button>
 
             <motion.button
               onClick={() => {
-                // Open QR code or external link
                 console.log('Learn more about the project');
               }}
-              className="group relative px-10 py-4 text-lg font-bold rounded-xl overflow-hidden flex-1"
-              style={{
-                background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+              className="px-10 py-6 font-black text-2xl bg-neon-magenta brutal-border-thick brutal-shadow-lg uppercase tracking-tight"
+              whileHover={{
+                y: -4,
+                boxShadow: '16px 16px 0px 0px #000000',
               }}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              whileTap={{
+                y: 0,
+                boxShadow: '4px 4px 0px 0px #000000',
+              }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              <span className="relative z-10 flex items-center justify-center gap-2 text-white">
-                📱 Learn More
+              <span className="flex items-center justify-center gap-3 text-brutal-white">
+                📱 SHARE
               </span>
             </motion.button>
           </motion.div>
 
-          {/* Footer message */}
           <motion.p
-            className="mt-8 text-center text-sm text-white/50"
+            className="mt-8 text-center text-base text-brutal-black font-bold uppercase"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
+            transition={{ delay: 1.6 }}
           >
-            Thanks for playing! Made with AI & ❤️
+            Made with AI & ❤️
           </motion.p>
-        </div>
+        </motion.div>
       </div>
-
-      {/* Floating particles */}
-      {Array.from({ length: 30 }).map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-1 h-1 bg-white rounded-full"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-          }}
-          animate={{
-            y: [0, -100, 0],
-            opacity: [0, 0.8, 0],
-            scale: [0, 1.5, 0],
-          }}
-          transition={{
-            duration: 3 + Math.random() * 2,
-            repeat: Infinity,
-            delay: Math.random() * 3,
-            ease: 'easeInOut'
-          }}
-        />
-      ))}
     </div>
   );
 }

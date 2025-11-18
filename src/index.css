@@ -1,16 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Archivo+Black&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Inter', sans-serif;
-  --font-display: 'Outfit', sans-serif;
+  --font-sans: 'Space Grotesk', sans-serif;
+  --font-display: 'Archivo Black', sans-serif;
 
-  --color-accent-purple: #8b5cf6;
-  --color-accent-pink: #ec4899;
-  --color-accent-cyan: #06b6d4;
-  --color-accent-violet: #a855f7;
-  --color-accent-fuchsia: #d946ef;
-  --color-accent-indigo: #6366f1;
+  --color-neon-yellow: #F7FF00;
+  --color-neon-magenta: #FF006E;
+  --color-neon-cyan: #00F5FF;
+  --color-neon-lime: #CCFF00;
+  --color-neon-orange: #FF5F00;
+  --color-brutal-black: #000000;
+  --color-brutal-white: #FFFFFF;
 }
 
 * {
@@ -21,11 +22,11 @@
 
 body {
   margin: 0;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
-  background: #050816;
+  background: #FFFFFF;
 }
 
 #root {
@@ -35,111 +36,132 @@ body {
 }
 
 @layer utilities {
-  /* Glassmorphism utilities */
-  .glass {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .glass-card {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  }
-
-  .glass-strong {
-    background: rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 16px 48px 0 rgba(31, 38, 135, 0.45);
-  }
-
-  .glass-dark {
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-  }
-
-  /* Gradient backgrounds */
-  .bg-gradient-purple {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  }
-
-  .bg-gradient-blue {
-    background: linear-gradient(135deg, #667eea 0%, #06b6d4 100%);
-  }
-
-  .bg-gradient-pink {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  }
-
-  .bg-gradient-cyber {
-    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
-    background-size: 200% 200%;
-  }
-
-  .bg-mesh-gradient {
-    background:
-      radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.3) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.3) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, rgba(217, 70, 239, 0.3) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, rgba(6, 182, 212, 0.3) 0px, transparent 50%);
-  }
-
-  /* Neumorphic utilities */
-  .neumorphic {
-    background: linear-gradient(145deg, #0f1729, #1a2540);
-    box-shadow: 12px 12px 24px #0a0f1f, -12px -12px 24px #1a2540;
-  }
-
-  .neumorphic-inset {
-    background: linear-gradient(145deg, #1a2540, #0f1729);
-    box-shadow: inset 8px 8px 16px #0a0f1f, inset -8px -8px 16px #1a2540;
-  }
-
-  /* Keep brutal design utilities */
+  /* Neobrutalist utilities */
   .brutal-border {
-    border: 4px solid black;
+    border: 6px solid #000000;
+  }
+
+  .brutal-border-thick {
+    border: 8px solid #000000;
+  }
+
+  .brutal-border-thin {
+    border: 4px solid #000000;
   }
 
   .brutal-shadow {
-    box-shadow: 8px 8px 0px 0px rgba(0,0,0,1);
+    box-shadow: 8px 8px 0px 0px #000000;
   }
 
   .brutal-shadow-sm {
-    box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+    box-shadow: 4px 4px 0px 0px #000000;
   }
 
   .brutal-shadow-lg {
-    box-shadow: 12px 12px 0px 0px rgba(0,0,0,1);
+    box-shadow: 12px 12px 0px 0px #000000;
+  }
+
+  .brutal-shadow-xl {
+    box-shadow: 16px 16px 0px 0px #000000;
+  }
+
+  .brutal-shadow-hover {
+    box-shadow: 4px 4px 0px 0px #000000;
   }
 
   .text-stroke {
-    -webkit-text-stroke: 2px black;
+    -webkit-text-stroke: 3px #000000;
     paint-order: stroke fill;
   }
 
   .text-stroke-sm {
-    -webkit-text-stroke: 1px black;
+    -webkit-text-stroke: 2px #000000;
     paint-order: stroke fill;
   }
 
-  /* Shimmer effect */
-  .shimmer {
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.1) 50%,
-      transparent 100%
+  .text-stroke-lg {
+    -webkit-text-stroke: 4px #000000;
+    paint-order: stroke fill;
+  }
+
+  /* Neobrutalist color backgrounds */
+  .bg-neon-yellow {
+    background-color: #F7FF00;
+  }
+
+  .bg-neon-magenta {
+    background-color: #FF006E;
+  }
+
+  .bg-neon-cyan {
+    background-color: #00F5FF;
+  }
+
+  .bg-neon-lime {
+    background-color: #CCFF00;
+  }
+
+  .bg-neon-orange {
+    background-color: #FF5F00;
+  }
+
+  .bg-brutal-black {
+    background-color: #000000;
+  }
+
+  .bg-brutal-white {
+    background-color: #FFFFFF;
+  }
+
+  /* Text colors */
+  .text-neon-yellow {
+    color: #F7FF00;
+  }
+
+  .text-neon-magenta {
+    color: #FF006E;
+  }
+
+  .text-neon-cyan {
+    color: #00F5FF;
+  }
+
+  .text-neon-lime {
+    color: #CCFF00;
+  }
+
+  .text-neon-orange {
+    color: #FF5F00;
+  }
+
+  .text-brutal-black {
+    color: #000000;
+  }
+
+  .text-brutal-white {
+    color: #FFFFFF;
+  }
+
+  /* Geometric patterns */
+  .bg-grid-pattern {
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 49px, #000000 49px, #000000 50px),
+      repeating-linear-gradient(90deg, transparent, transparent 49px, #000000 49px, #000000 50px);
+    background-size: 50px 50px;
+  }
+
+  .bg-diagonal-stripes {
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(0, 0, 0, 0.1) 20px,
+      rgba(0, 0, 0, 0.1) 40px
     );
-    background-size: 200% 100%;
-    animation: shimmer 2s linear infinite;
+  }
+
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
   }
 }
 
@@ -181,6 +203,59 @@ body {
   }
 }
 
+@keyframes shake {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  10% { transform: translateX(-10px) rotate(-2deg); }
+  20% { transform: translateX(10px) rotate(2deg); }
+  30% { transform: translateX(-10px) rotate(-1deg); }
+  40% { transform: translateX(10px) rotate(1deg); }
+  50% { transform: translateX(-5px) rotate(-0.5deg); }
+  60% { transform: translateX(5px) rotate(0.5deg); }
+  70% { transform: translateX(-5px) rotate(-0.5deg); }
+  80% { transform: translateX(5px) rotate(0.5deg); }
+  90% { transform: translateX(-2px) rotate(0deg); }
+}
+
+@keyframes tremble {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, 2px); }
+  50% { transform: translate(2px, -2px); }
+  75% { transform: translate(-2px, -2px); }
+}
+
+@keyframes bounce-in {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-border {
+  0%, 100% {
+    border-color: #000000;
+    transform: scale(1);
+  }
+  50% {
+    border-color: #FF006E;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes color-flash {
+  0%, 100% { background-color: transparent; }
+  50% { background-color: rgba(247, 255, 0, 0.3); }
+}
+
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
@@ -191,4 +266,24 @@ body {
 
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-shake {
+  animation: shake 0.6s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+.animate-tremble {
+  animation: tremble 0.1s linear infinite;
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.animate-slide-up {
+  animation: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-pulse-border {
+  animation: pulse-border 1.5s ease-in-out infinite;
 }

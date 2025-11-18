@@ -5,207 +5,222 @@ export function LandingScreen() {
   const { startGame } = useGame();
 
   return (
-    <div className="w-full h-full flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-800">
-      {/* Animated mesh gradient background */}
-      <div className="absolute inset-0 bg-mesh-gradient animate-gradient opacity-60"></div>
+    <div className="w-full h-full flex items-center justify-center relative overflow-hidden bg-neon-cyan">
+      <div className="absolute inset-0 bg-grid-pattern opacity-20"></div>
+      <div className="absolute inset-0 bg-noise"></div>
 
-      {/* Floating gradient orbs */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          className="absolute w-96 h-96 rounded-full opacity-30 blur-3xl"
-          style={{
-            background: 'radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, transparent 70%)',
-            top: '10%',
-            left: '10%'
-          }}
-          animate={{
-            x: [0, 50, 0],
-            y: [0, -50, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: 'easeInOut'
-          }}
-        />
-        <motion.div
-          className="absolute w-[32rem] h-[32rem] rounded-full opacity-30 blur-3xl"
-          style={{
-            background: 'radial-gradient(circle, rgba(236, 72, 153, 0.4) 0%, transparent 70%)',
-            bottom: '10%',
-            right: '10%'
-          }}
-          animate={{
-            x: [0, -50, 0],
-            y: [0, 50, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: 'easeInOut'
-          }}
-        />
-        <motion.div
-          className="absolute w-80 h-80 rounded-full opacity-20 blur-3xl"
-          style={{
-            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.4) 0%, transparent 70%)',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)'
-          }}
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.2, 0.3, 0.2],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: 'easeInOut'
-          }}
-        />
-      </div>
+      <motion.div
+        className="absolute w-32 h-32 bg-neon-yellow brutal-border-thick transform rotate-12"
+        style={{ top: '10%', left: '10%' }}
+        animate={{
+          y: [0, -30, 0],
+          rotate: [12, 22, 12],
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: 'easeInOut'
+        }}
+      />
 
-      {/* Main content */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-8">
+      <motion.div
+        className="absolute w-24 h-24 rounded-full bg-neon-magenta brutal-border-thick"
+        style={{ top: '20%', right: '15%' }}
+        animate={{
+          y: [0, 40, 0],
+          scale: [1, 1.1, 1],
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: 'easeInOut'
+        }}
+      />
+
+      <motion.div
+        className="absolute w-40 h-40 bg-neon-lime brutal-border-thick"
+        style={{ bottom: '15%', left: '5%', clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)' }}
+        animate={{
+          rotate: [0, 10, 0],
+        }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          ease: 'easeInOut'
+        }}
+      />
+
+      <motion.div
+        className="absolute w-36 h-36 bg-neon-orange brutal-border-thick transform -rotate-45"
+        style={{ bottom: '10%', right: '10%' }}
+        animate={{
+          y: [0, -20, 0],
+          rotate: [-45, -35, -45],
+        }}
+        transition={{
+          duration: 3.5,
+          repeat: Infinity,
+          ease: 'easeInOut'
+        }}
+      />
+
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-6">
         <div className="flex flex-col items-center">
-          {/* Hero Card */}
           <motion.div
-            className="glass-strong rounded-3xl p-12 max-w-4xl w-full"
-            initial={{ opacity: 0, y: 50, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.8, type: 'spring', bounce: 0.4 }}
+            className="bg-brutal-white brutal-border-thick brutal-shadow-xl p-12 w-full max-w-4xl transform -rotate-1"
+            initial={{ opacity: 0, y: 100, scale: 0.8, rotate: -10 }}
+            animate={{ opacity: 1, y: 0, scale: 1, rotate: -1 }}
+            transition={{
+              duration: 0.6,
+              type: 'spring',
+              bounce: 0.5
+            }}
           >
-            {/* Badge */}
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 border border-white/20"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
+              className="inline-flex items-center gap-3 px-6 py-3 brutal-border bg-neon-yellow mb-8 transform rotate-2"
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3, type: 'spring', bounce: 0.6 }}
             >
-              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-              <span className="text-sm font-medium text-white/80">AI Detection Challenge</span>
+              <motion.div
+                className="w-4 h-4 rounded-full bg-brutal-black"
+                animate={{ scale: [1, 1.3, 1] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              />
+              <span className="text-base font-bold text-brutal-black uppercase tracking-tight">
+                AI Detection Challenge
+              </span>
             </motion.div>
 
-            {/* Title */}
             <motion.div
-              className="mb-6"
-              initial={{ opacity: 0, y: 20 }}
+              className="mb-8"
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              <h1 className="text-7xl md:text-8xl font-black text-white mb-4 leading-tight">
-                Can You Spot
+              <h1 className="font-display text-7xl md:text-9xl font-black text-brutal-black mb-6 leading-none uppercase tracking-tighter">
+                CAN YOU
                 <br />
-                <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
-                  The AI?
+                <span className="text-neon-magenta text-stroke">
+                  SPOT THE
+                </span>
+                <br />
+                <span className="text-neon-yellow text-stroke">
+                  AI?
                 </span>
               </h1>
             </motion.div>
 
-            {/* Description */}
             <motion.p
-              className="text-xl md:text-2xl text-white/70 mb-8 font-medium"
+              className="text-2xl md:text-3xl text-brutal-black font-bold mb-10 uppercase tracking-tight"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
             >
-              Test your skills in distinguishing real images from AI-generated art.
-              6 challenging questions await!
+              6 EPIC ROUNDS. REAL VS FAKE. ARE YOU READY?
             </motion.p>
 
-            {/* Features grid */}
             <motion.div
-              className="grid grid-cols-3 gap-4 mb-10"
-              initial={{ opacity: 0, y: 20 }}
+              className="grid grid-cols-3 gap-6 mb-10"
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
             >
               {[
-                { icon: '🎯', label: '6 Questions', desc: 'Carefully curated' },
-                { icon: '📸', label: 'Photo Finish', desc: 'Epic final twist' },
-                { icon: '✨', label: '100% Fun', desc: 'Guaranteed' }
+                { icon: '🎯', label: '6 ROUNDS', bg: 'bg-neon-lime' },
+                { icon: '🔥', label: 'INSANE MODE', bg: 'bg-neon-magenta' },
+                { icon: '⚡', label: '100% FUN', bg: 'bg-neon-orange' }
               ].map((feature, i) => (
                 <motion.div
                   key={i}
-                  className="glass rounded-2xl p-6 text-center border border-white/10"
-                  whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
-                  transition={{ type: 'spring', stiffness: 300 }}
+                  className={`${feature.bg} brutal-border-thick brutal-shadow p-6 text-center transform hover:-translate-y-2 transition-all cursor-default`}
+                  whileHover={{
+                    rotate: [0, -2, 2, 0],
+                    boxShadow: '8px 8px 0px 0px #000000'
+                  }}
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.7 + i * 0.1, type: 'spring', bounce: 0.6 }}
                 >
-                  <div className="text-4xl mb-2">{feature.icon}</div>
-                  <div className="text-white font-bold text-sm mb-1">{feature.label}</div>
-                  <div className="text-white/50 text-xs">{feature.desc}</div>
+                  <div className="text-6xl mb-3">{feature.icon}</div>
+                  <div className="text-brutal-black font-black text-lg tracking-tight uppercase">
+                    {feature.label}
+                  </div>
                 </motion.div>
               ))}
             </motion.div>
 
-            {/* CTA Button */}
             <motion.button
               onClick={startGame}
-              className="group relative w-full px-12 py-6 text-2xl font-bold text-white rounded-2xl overflow-hidden"
-              style={{
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-              }}
-              initial={{ opacity: 0, y: 20 }}
+              className="group relative w-full px-12 py-8 font-black text-4xl text-brutal-white bg-brutal-black brutal-border-thick brutal-shadow-lg uppercase tracking-tight overflow-hidden"
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7 }}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              transition={{ delay: 0.8 }}
+              whileHover={{
+                y: -4,
+                boxShadow: '16px 16px 0px 0px #000000',
+              }}
+              whileTap={{
+                y: 0,
+                boxShadow: '4px 4px 0px 0px #000000',
+              }}
             >
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600"
+                className="absolute inset-0 bg-neon-magenta"
                 initial={{ x: '-100%' }}
-                whileHover={{ x: '100%' }}
-                transition={{ duration: 0.6 }}
+                whileHover={{ x: 0 }}
+                transition={{ duration: 0.3 }}
               />
-              <span className="relative z-10 flex items-center justify-center gap-3">
-                Start Challenge
+              <span className="relative z-10 flex items-center justify-center gap-4">
+                START NOW
                 <motion.span
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
+                  animate={{ x: [0, 10, 0] }}
+                  transition={{ duration: 1, repeat: Infinity }}
+                  className="text-5xl"
                 >
                   →
                 </motion.span>
               </span>
             </motion.button>
 
-            {/* Info footer */}
             <motion.div
-              className="mt-6 flex items-center justify-center gap-2 text-white/50 text-sm"
+              className="mt-8 flex items-center justify-center gap-3 text-brutal-black text-sm font-bold uppercase"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.9 }}
+              transition={{ delay: 1 }}
             >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
               </svg>
-              Camera access needed for the surprise finale
+              Camera access needed
             </motion.div>
           </motion.div>
 
-          {/* Floating particles */}
-          {Array.from({ length: 20 }).map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-white rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                y: [0, -100, 0],
-                opacity: [0, 0.5, 0],
-                scale: [0, 1, 0],
-              }}
-              transition={{
-                duration: 3 + Math.random() * 2,
-                repeat: Infinity,
-                delay: Math.random() * 3,
-                ease: 'easeInOut'
-              }}
-            />
-          ))}
+          <motion.div
+            className="absolute top-4 left-4 w-20 h-20 bg-neon-yellow brutal-border-thick"
+            initial={{ scale: 0, rotate: -45 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ delay: 0.2, type: 'spring' }}
+          />
+          <motion.div
+            className="absolute top-4 right-4 w-16 h-16 rounded-full bg-neon-magenta brutal-border-thick"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.3, type: 'spring' }}
+          />
+          <motion.div
+            className="absolute bottom-4 left-4 w-24 h-24 bg-neon-orange brutal-border-thick"
+            style={{ clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)' }}
+            initial={{ scale: 0, rotate: 180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ delay: 0.4, type: 'spring' }}
+          />
+          <motion.div
+            className="absolute bottom-4 right-4 w-20 h-20 bg-neon-lime brutal-border-thick transform rotate-45"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.5, type: 'spring' }}
+          />
         </div>
       </div>
     </div>
