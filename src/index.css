@@ -12,6 +12,19 @@
   --color-neon-orange: #FF5F00;
   --color-brutal-black: #000000;
   --color-brutal-white: #FFFFFF;
+
+  --color-neon: {
+    yellow: #F7FF00;
+    magenta: #FF006E;
+    cyan: #00F5FF;
+    lime: #CCFF00;
+    orange: #FF5F00;
+  }
+
+  --color-brutal: {
+    black: #000000;
+    white: #FFFFFF;
+  }
 }
 
 * {
@@ -35,134 +48,132 @@ body {
   overflow: hidden;
 }
 
-@layer utilities {
-  /* Neobrutalist utilities */
-  .brutal-border {
-    border: 6px solid #000000;
-  }
+/* Neobrutalist utilities */
+.brutal-border {
+  border: 6px solid #000000 !important;
+}
 
-  .brutal-border-thick {
-    border: 8px solid #000000;
-  }
+.brutal-border-thick {
+  border: 8px solid #000000 !important;
+}
 
-  .brutal-border-thin {
-    border: 4px solid #000000;
-  }
+.brutal-border-thin {
+  border: 4px solid #000000 !important;
+}
 
-  .brutal-shadow {
-    box-shadow: 8px 8px 0px 0px #000000;
-  }
+.brutal-shadow {
+  box-shadow: 8px 8px 0px 0px #000000 !important;
+}
 
-  .brutal-shadow-sm {
-    box-shadow: 4px 4px 0px 0px #000000;
-  }
+.brutal-shadow-sm {
+  box-shadow: 4px 4px 0px 0px #000000 !important;
+}
 
-  .brutal-shadow-lg {
-    box-shadow: 12px 12px 0px 0px #000000;
-  }
+.brutal-shadow-lg {
+  box-shadow: 12px 12px 0px 0px #000000 !important;
+}
 
-  .brutal-shadow-xl {
-    box-shadow: 16px 16px 0px 0px #000000;
-  }
+.brutal-shadow-xl {
+  box-shadow: 16px 16px 0px 0px #000000 !important;
+}
 
-  .brutal-shadow-hover {
-    box-shadow: 4px 4px 0px 0px #000000;
-  }
+.brutal-shadow-hover {
+  box-shadow: 4px 4px 0px 0px #000000 !important;
+}
 
-  .text-stroke {
-    -webkit-text-stroke: 3px #000000;
-    paint-order: stroke fill;
-  }
+.text-stroke {
+  -webkit-text-stroke: 3px #000000 !important;
+  paint-order: stroke fill !important;
+}
 
-  .text-stroke-sm {
-    -webkit-text-stroke: 2px #000000;
-    paint-order: stroke fill;
-  }
+.text-stroke-sm {
+  -webkit-text-stroke: 2px #000000 !important;
+  paint-order: stroke fill !important;
+}
 
-  .text-stroke-lg {
-    -webkit-text-stroke: 4px #000000;
-    paint-order: stroke fill;
-  }
+.text-stroke-lg {
+  -webkit-text-stroke: 4px #000000 !important;
+  paint-order: stroke fill !important;
+}
 
-  /* Neobrutalist color backgrounds */
-  .bg-neon-yellow {
-    background-color: #F7FF00;
-  }
+/* Neobrutalist color backgrounds */
+.bg-neon-yellow {
+  background-color: #F7FF00 !important;
+}
 
-  .bg-neon-magenta {
-    background-color: #FF006E;
-  }
+.bg-neon-magenta {
+  background-color: #FF006E !important;
+}
 
-  .bg-neon-cyan {
-    background-color: #00F5FF;
-  }
+.bg-neon-cyan {
+  background-color: #00F5FF !important;
+}
 
-  .bg-neon-lime {
-    background-color: #CCFF00;
-  }
+.bg-neon-lime {
+  background-color: #CCFF00 !important;
+}
 
-  .bg-neon-orange {
-    background-color: #FF5F00;
-  }
+.bg-neon-orange {
+  background-color: #FF5F00 !important;
+}
 
-  .bg-brutal-black {
-    background-color: #000000;
-  }
+.bg-brutal-black {
+  background-color: #000000 !important;
+}
 
-  .bg-brutal-white {
-    background-color: #FFFFFF;
-  }
+.bg-brutal-white {
+  background-color: #FFFFFF !important;
+}
 
-  /* Text colors */
-  .text-neon-yellow {
-    color: #F7FF00;
-  }
+/* Text colors */
+.text-neon-yellow {
+  color: #F7FF00 !important;
+}
 
-  .text-neon-magenta {
-    color: #FF006E;
-  }
+.text-neon-magenta {
+  color: #FF006E !important;
+}
 
-  .text-neon-cyan {
-    color: #00F5FF;
-  }
+.text-neon-cyan {
+  color: #00F5FF !important;
+}
 
-  .text-neon-lime {
-    color: #CCFF00;
-  }
+.text-neon-lime {
+  color: #CCFF00 !important;
+}
 
-  .text-neon-orange {
-    color: #FF5F00;
-  }
+.text-neon-orange {
+  color: #FF5F00 !important;
+}
 
-  .text-brutal-black {
-    color: #000000;
-  }
+.text-brutal-black {
+  color: #000000 !important;
+}
 
-  .text-brutal-white {
-    color: #FFFFFF;
-  }
+.text-brutal-white {
+  color: #FFFFFF !important;
+}
 
-  /* Geometric patterns */
-  .bg-grid-pattern {
-    background-image:
-      repeating-linear-gradient(0deg, transparent, transparent 49px, #000000 49px, #000000 50px),
-      repeating-linear-gradient(90deg, transparent, transparent 49px, #000000 49px, #000000 50px);
-    background-size: 50px 50px;
-  }
+/* Geometric patterns */
+.bg-grid-pattern {
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 49px, #000000 49px, #000000 50px),
+    repeating-linear-gradient(90deg, transparent, transparent 49px, #000000 49px, #000000 50px);
+  background-size: 50px 50px;
+}
 
-  .bg-diagonal-stripes {
-    background-image: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 20px,
-      rgba(0, 0, 0, 0.1) 20px,
-      rgba(0, 0, 0, 0.1) 40px
-    );
-  }
+.bg-diagonal-stripes {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 20px,
+    rgba(0, 0, 0, 0.1) 20px,
+    rgba(0, 0, 0, 0.1) 40px
+  );
+}
 
-  .bg-noise {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-  }
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
 }
 
 /* Hide scrollbars but keep functionality */

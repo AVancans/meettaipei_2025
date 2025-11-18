@@ -133,10 +133,10 @@ export function LandingScreen() {
               ].map((feature, i) => (
                 <motion.div
                   key={i}
-                  className={`${feature.bg} brutal-border-thick brutal-shadow p-6 text-center transform hover:-translate-y-2 transition-all cursor-default`}
+                  className={`${feature.bg} brutal-border-thick brutal-shadow p-6 text-center cursor-default`}
                   whileHover={{
-                    rotate: [0, -2, 2, 0],
-                    boxShadow: '8px 8px 0px 0px #000000'
+                    y: -8,
+                    boxShadow: '16px 16px 0px 0px #000000'
                   }}
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: 1, scale: 1 }}
